@@ -7,7 +7,7 @@ const readdir = promisify(fs.readdir);
 const rename = promisify(fs.rename);
 const stat = promisify(fs.stat);
 
-var sourcefolder = 'reactjs101' // 源地址
+var sourcefolder = 'source' // 源地址
 var newfolder = 'translate' //转换后的地址
 var ignores = ['.git'] // 忽略的文件，全称来判断
 var translates = ['.md', '.txt'] // 需要转换的文件，扩展名
