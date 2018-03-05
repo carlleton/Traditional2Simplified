@@ -1,4 +1,4 @@
-const {simpPYStr,ftPYStr,qqPYStr} = require('./data')
+const { convert } = require('./data')
 const { promisify } = require('util');
 const { resolve } = require('path');
 
@@ -7,7 +7,7 @@ const readdir = promisify(fs.readdir);
 const rename = promisify(fs.rename);
 const stat = promisify(fs.stat);
 
-var sourcefolder = 'source' // 源地址
+var sourcefolder = 'reactjs101' // 源地址
 var newfolder = 'translate' //转换后的地址
 var ignores = ['.git'] // 忽略的文件，全称来判断
 var translates = ['.md', '.txt'] // 需要转换的文件，扩展名
@@ -50,18 +50,8 @@ async function getFiles(dir, subdir) {
 async function traditionlize(fileName, newfile) {
   console.log('readfile', fileName)
   var data = (await fs.readFileSync(fileName)).toString()
-  var str = ''
 
-  var str='';
-  for(var i=0;i<data.length;i++){
-      if (ftPYStr().indexOf(data.charAt(i))!=-1) {
-        str+=simpPYStr().charAt(ftPYStr().indexOf(data.charAt(i)));
-      } else if(qqPYStr().indexOf(data.charAt(i))!=-1) {
-        str+=simpPYStr().charAt(qqPYStr().indexOf(data.charAt(i)));
-      } else {
-        str+=data.charAt(i);
-      }
-  }
+  var str = convert(0, data)
 
   fs.writeFile(newfile, str, function(err, result) {
     if (err) {
